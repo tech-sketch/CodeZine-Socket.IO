@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         msgArea = (EditText)findViewById(R.id.msgArea);
         send = (Button)findViewById(R.id.send);
         send.setOnClickListener(onClickSend);
-        
+        send.setEnabled(false);
         spinner = new Spinner();
     }
     
