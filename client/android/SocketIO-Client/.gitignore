@@ -1,0 +1,9 @@
+bin/
+libs/
+gen/
+*.apk
+*.ap_
+*.dex
+*.class
+local.properties
+.DS_Store

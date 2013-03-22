@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>
+    <% if (typeof protocol != 'undefined') { %>
+      var socket = io.connect("<%= host %>", {transports: ["<%= protocol %>"]});
+    <% } else { %> 
+      var socket = io.connect("<%= host %>");
+    <% } %>
+      $(document).ready(function(){
+        var send = $("#send");
+        var msg = $("#msg");
+        var msgArea = $("#msgArea");
+
+        socket.on("broadcast", function(data){
+          msgArea.append("<div>" + data + "</div>");
+        });
+        
+        send.on("click", function(){
+          socket.emit("message", msg.val());
+          msg.val("");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <input type="text" id="msg" placeholder="message here" />
+    <button id="send">Send</button>
+    <div id="msgArea"></div>
+  </body>
+</html>
